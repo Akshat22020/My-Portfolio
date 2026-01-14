@@ -741,3 +741,46 @@ section {
     opacity: 0;
   }
 }
+/* ✅ Compact scrollable screenshots inside project card */
+.project-gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.project-gallery img {
+  flex: 0 0 auto;
+  width: 210px;      /* ✅ card compact feel */
+  height: 120px;     /* ✅ image height small */
+  object-fit: cover;
+
+  border-radius: 14px;
+  border: 1px solid var(--border);
+
+  scroll-snap-align: start;
+  transition: 0.2s ease;
+}
+
+/* smooth hover on images */
+.project-gallery img:hover {
+  transform: scale(1.02);
+}
+
+/* hide scrollbar (clean look) */
+.project-gallery::-webkit-scrollbar {
+  height: 6px;
+}
+
+.project-gallery::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 99px;
+}
+
+.project-gallery::-webkit-scrollbar-track {
+  background: transparent;
+}

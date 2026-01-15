@@ -12,8 +12,13 @@
     
   <header class="navbar">
     <div class="logo">Akshat<span>.</span></div>
+     <button class="menu-btn" id="menuToggle" aria-label="Toggle Menu">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
 
-    <nav class="nav-links">
+    <nav class="nav-links" id="mobileMenu">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
@@ -29,7 +34,7 @@
 
 
   </header>
-
+<div class="menu-overlay" id="menuOverlay"></div>
   <main>
     <!-- HERO -->
     <section class="hero">
@@ -150,7 +155,7 @@
   <div class="cards">
 
     <!-- Project 1 -->
-    <div class="card reveal-card">
+    <div class="card reveal-card clickable-card" data-live="https://odessey.lovable.app">
       <div class="project-gallery">
         <img src="images/Projects/Project1/Screenshot 2026-01-14 134837.png" alt="Travel Management Website" class="project-img" />
       <img src="images/Projects/Project1/Screenshot 2026-01-14 134902.png" alt="Travel Management Website" class="project-img" />
@@ -179,7 +184,7 @@
 
 
     <!-- Project 2 -->
-    <div class="card reveal-card">
+    <div class="card reveal-card clickable-card" data-live="https://aagman-prototype1.netlify.app/">
       <div class="project-gallery">
         
         <img src="images/Projects/Project2/Screenshot 2026-01-14 145236.png" alt="AAGMAN Hospital Management System" class="project-img" />
@@ -209,7 +214,7 @@
 
 
     <!-- Project 3 -->
-    <div class="card reveal-card">
+    <div class="card reveal-card clickable-card" data-live="https://your-live-link-here.com">
       <img src="images/Projects/Project3/Screenshot 2026-01-14 144244.png" alt="ML Mini Projects" class="project-img" />
 
       <h3>🤖 ML Mini Projects</h3>
@@ -315,7 +320,7 @@
   </main>
 
   <footer class="footer">
-    <p> © <span id="year"></span> Akshat Raj • Built with ❤️</p>
+    <p> © <span id="year"></span> Akshat Raj • Built with Love <3❤️</p>
   </footer>
   <div class="spotlight"></div>
 <audio id="lumosSound" src="sounds/lumos.mp3" preload="auto"></audio>

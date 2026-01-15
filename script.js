@@ -18,6 +18,35 @@ toggleBtn.addEventListener("click", () => {
 
   toggleBtn.textContent = isLight ? "☀️" : "🌙";
 });
+ //================ Menu Toggle =====// ===== Hamburger Menu Toggle =====
+const menuToggle = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+const menuOverlay = document.getElementById("menuOverlay");
+
+if (menuToggle && mobileMenu && menuOverlay) {
+  menuToggle.addEventListener("click", () => {
+  mobileMenu.classList.toggle("active");
+  menuOverlay.classList.toggle("active");
+  menuToggle.classList.toggle("active"); // 🔥 bars -> X
+});
+
+
+  // close menu when clicking overlay
+  menuOverlay.addEventListener("click", () => {
+    mobileMenu.classList.remove("active");
+    menuOverlay.classList.remove("active");
+  });
+
+  // close menu when clicking any link
+  mobileMenu.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.remove("active");
+    menuOverlay.classList.remove("active");
+    menuToggle.classList.remove("active");
+  });
+});
+
+}
 
 
 // ===== Sound Toggle =====
@@ -163,4 +192,21 @@ window.addEventListener("click", (e) => {
 
     setTimeout(() => s.remove(), 750);
   }
+});
+// ===== Clickable Project Cards (Smooth Redirect) =====
+document.querySelectorAll(".clickable-card").forEach((card) => {
+  card.addEventListener("click", () => {
+    const link = card.getAttribute("data-live");
+    if (!link) return;
+
+    // tiny delay for click animation feel
+    setTimeout(() => {
+      window.open(link, "_blank");
+    }, 120);
+  });
+});
+
+// prevent redirect when clicking buttons/links inside card
+document.querySelectorAll(".clickable-card a").forEach((link) => {
+  link.addEventListener("click", (e) => e.stopPropagation());
 });

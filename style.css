@@ -1046,3 +1046,208 @@ section {
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+@media (max-width: 600px) {
+  .navbar {
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  /* ✅ LEFTMOST menu */
+  #menuToggle {
+    order: 1;
+  }
+
+  .logo {
+    order: 2;
+    margin-right: auto;
+    margin-left: 10px; /* little spacing from menu */
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .nav-actions {
+    order: 3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+/* ===== Harry Potter Intro Splash ===== */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at top, rgba(124, 92, 255, 0.18), transparent 55%),
+              rgba(5, 6, 12, 0.92);
+  backdrop-filter: blur(16px);
+  transition: 0.6s ease;
+}
+
+.intro-content {
+  text-align: center;
+  padding: 24px;
+  max-width: 520px;
+  animation: introPop 900ms ease forwards;
+}
+
+@keyframes introPop {
+  0% { opacity: 0; transform: translateY(18px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+/* ===== Intro Content Styles ===== */
+.intro-logo {
+  font-size: 44px;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 18px rgba(124, 92, 255, 0.6));
+}
+
+.intro-title {
+  font-size: 46px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 18px rgba(255, 215, 120, 0.22),
+    0 0 40px rgba(124, 92, 255, 0.25);
+}
+
+.intro-subtitle {
+  margin-top: 10px;
+  color: rgba(232, 236, 255, 0.75);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.intro-btn {
+  margin-top: 18px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.intro-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(124, 92, 255, 0.65);
+  box-shadow: 0 0 18px rgba(124, 92, 255, 0.22);
+}
+
+.intro-screen.hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.02);
+}
+/* ===== Wand Stroke Animation ===== */
+.wand-stroke {
+  width: 0px;
+  height: 3px;
+  margin: 14px auto 6px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 120, 0.95),
+    rgba(124, 92, 255, 0.9),
+    rgba(255, 255, 255, 0.95)
+  );
+
+  box-shadow:
+    0 0 14px rgba(255, 215, 120, 0.45),
+    0 0 34px rgba(124, 92, 255, 0.35);
+
+  opacity: 0;
+  transition: 0.25s ease;
+}
+
+/* when active */
+.wand-stroke.cast {
+  opacity: 1;
+  animation: wandDraw 1200ms ease forwards, wandGlow 1200ms ease forwards;
+}
+
+@keyframes wandDraw {
+  0% { width: 0px; }
+  100% { width: 280px; }
+}
+
+@keyframes wandGlow {
+  0% { filter: blur(1px); }
+  100% { filter: blur(0px); }
+}
+/* ===== Wand Movement ===== */
+.wand-wrap {
+  width: 140px;
+  height: 60px;
+  margin: 8px auto 6px;
+  position: relative;
+  transform-origin: 20px 30px;
+  opacity: 0.95;
+}
+
+.wand {
+  position: absolute;
+  left: 10px;
+  top: 28px;
+  width: 120px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4b2e1a, #b88a5a, #3a2416);
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+.wand-tip {
+  position: absolute;
+  left: 128px;
+  top: 22px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 245, 200, 0.95);
+  box-shadow:
+    0 0 10px rgba(255, 215, 120, 0.7),
+    0 0 26px rgba(124, 92, 255, 0.45);
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+/* Swing animation on cast */
+.wand-wrap.cast {
+  animation: wandSwing 1100ms ease-in-out forwards;
+}
+
+.wand-wrap.cast .wand-tip {
+  opacity: 1;
+}
+
+@keyframes wandSwing {
+  0%   { transform: rotate(0deg) translateX(0px); }
+  25%  { transform: rotate(-18deg) translateX(-2px); }
+  55%  { transform: rotate(28deg) translateX(3px); }
+  80%  { transform: rotate(-10deg) translateX(-1px); }
+  100% { transform: rotate(0deg) translateX(0px); }
+}
+/* ===== Welcome Text (Cinematic Fade-in) ===== */
+.intro-welcome {
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(232, 236, 255, 0.8);
+  letter-spacing: 0.3px;
+
+  opacity: 0;
+  transform: translateY(8px);
+  transition: 0.6s ease;
+}
+
+.intro-welcome.show {
+  opacity: 1;
+  transform: translateY(0);
+}

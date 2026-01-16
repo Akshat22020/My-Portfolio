@@ -32,10 +32,12 @@ if (menuToggle && mobileMenu && menuOverlay) {
 
 
   // close menu when clicking overlay
-  menuOverlay.addEventListener("click", () => {
-    mobileMenu.classList.remove("active");
-    menuOverlay.classList.remove("active");
-  });
+ menuOverlay.addEventListener("click", () => {
+  mobileMenu.classList.remove("active");
+  menuOverlay.classList.remove("active");
+  menuToggle.classList.remove("active");
+});
+
 
   // close menu when clicking any link
   mobileMenu.querySelectorAll("a").forEach((link) => {
@@ -210,3 +212,67 @@ document.querySelectorAll(".clickable-card").forEach((card) => {
 document.querySelectorAll(".clickable-card a").forEach((link) => {
   link.addEventListener("click", (e) => e.stopPropagation());
 });
+// ===== Intro Splash Screen (Synced with 7s Sound) =====
+const introScreen = document.getElementById("introScreen");
+const enterBtn = document.getElementById("enterBtn");
+const introMusic = document.getElementById("introMusic");
+const wandStroke = document.getElementById("wandStroke");
+const wandWrap = document.getElementById("wandWrap");
+const introWelcome = document.getElementById("introWelcome");
+
+const INTRO_DURATION = 7000; // ✅ 7 seconds sound length
+
+function hideIntro() {
+  if (!introScreen) return;
+  introScreen.classList.add("hide");
+}
+
+if (enterBtn) {
+  enterBtn.addEventListener("click", async (e) => {
+    e.stopPropagation();
+
+    // ✅ Disable button so user can’t spam it
+    enterBtn.disabled = true;
+    enterBtn.style.opacity = "0.75";
+    enterBtn.style.pointerEvents = "none";
+    enterBtn.textContent = "Casting...🪄✨";
+
+    // ✅ Start wand movement
+    if (wandWrap) wandWrap.classList.add("cast");
+
+    // ✅ Start wand stroke slightly after movement starts (better sync)
+    setTimeout(() => {
+      if (wandStroke) wandStroke.classList.add("cast");
+    }, 250);
+
+    // ✅ Welcome text fades in (cinematic)
+    setTimeout(() => {
+      if (introWelcome) introWelcome.classList.add("show");
+    }, 700);
+
+    // ✅ Play intro sound (allowed on user click)
+    if (introMusic) {
+      introMusic.currentTime = 0;
+      introMusic.volume = 0.55;
+
+      try {
+        await introMusic.play();
+      } catch (err) {
+        console.log("Audio blocked:", err);
+      }
+    }
+
+    // ✅ Hide exactly after 7 seconds
+    setTimeout(() => {
+      hideIntro();
+    }, INTRO_DURATION);
+  });
+}
+
+// ✅ Don’t allow clicking background to skip (forces Enter press)
+if (introScreen) {
+  introScreen.addEventListener("click", (e) => {
+    // only block background clicks
+    if (e.target.id === "introScreen") return;
+  });
+}
